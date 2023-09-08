@@ -1,0 +1,23 @@
+name: Deploy to GitHub Pages
+
+on:
+  workflow-dispathes:
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install and Build
+      run: |
+        cd src
+        npm install
+        npm run build
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.DESIGNER54S_ACTION }}
+        publish_dir: ./src/build
