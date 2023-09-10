@@ -13,11 +13,13 @@ jobs:
 
     - name: Install and Build
       run: |
-        cd src
+        cd app
         npm install
         npm run build
+        npm install -g next
+        next export
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.DESIGNER54S_ACTION }}
-        publish_dir: ./src/build
+        publish_dir: ./app/out
