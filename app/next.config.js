@@ -1,8 +1,13 @@
+const urlPrefix = process.env.URL_PREFIX ? '/' + process.env.URL_PREFIX : ''
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    basePath: '/Designer-sWorks',
-    assetPrefix: '/Designer-sWorks/',
-    output: "export"
+    assetPrefix: urlPrefix,
+    basePath: urlPrefix,
+    trailingSlash: true,
+    publicRuntimeConfig: {
+        basePath: urlPrefix,
+    },
 }
 
 module.exports = nextConfig
