@@ -8,6 +8,7 @@ const nextConfig = {
     publicRuntimeConfig: {
         basePath: urlPrefix,
     },
+    output: "export"
 }
 
 module.exports = nextConfig
