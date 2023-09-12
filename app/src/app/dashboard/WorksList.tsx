@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import Particles from '@/component/particles'
 import WorksCard from '@/component/WorksCard'
 import {Grid} from '@mui/joy'
@@ -7,7 +7,7 @@ import {motion} from 'framer-motion'
 import React from 'react'
 
 
-export default async function WorksList(
+export default function WorksList(
   props: { folders: string[] }
 ) {
   return (
@@ -30,7 +30,7 @@ export default async function WorksList(
           </Grid>
 
           {props.folders.map((folder, index) => (
-            <Grid　key ={index}>
+            <Grid key={index}>
               <WorksCard caption={folder} title={'タイトルです'}/>
             </Grid>
           ))}
