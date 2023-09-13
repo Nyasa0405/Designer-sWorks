@@ -23,7 +23,7 @@ function WorksCard(
       />
       <CardContent sx={{ justifyContent: 'flex-end' }}>
         <Typography level="title-md">{props.title}</Typography>
-        <Typography level="body-sm">{props.caption}</Typography>
+        {/* <Typography level="body-sm">{props.caption}</Typography> */}
       </CardContent>
     </Card>
   )

@@ -1,4 +1,5 @@
 'use client'
+import {WorkInfo} from '@/api/folders'
 import Particles from '@/component/particles'
 import WorksCard from '@/component/WorksCard'
 import {Grid} from '@mui/joy'
@@ -8,8 +9,9 @@ import React from 'react'
 
 
 export default function WorksList(
-  props: { folders: string[] }
+  props: { folders: WorkInfo[] }
 ) {
+  console.log(props.folders)
   return (
     <Box>
       <Particles
@@ -31,7 +33,7 @@ export default function WorksList(
 
           {props.folders.map((folder, index) => (
             <Grid key={index}>
-              <WorksCard caption={folder} title={'タイトルです'}/>
+              <WorksCard caption={folder.caption} title={folder.title}/>
             </Grid>
           ))}
         </Grid>
