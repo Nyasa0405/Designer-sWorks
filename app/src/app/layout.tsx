@@ -22,12 +22,12 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body>
-        <MainContent>
-          {children}
-        </MainContent>
         <Box
           sx={{ position: 'fixed', width: 1, height: 1}}
         >
+          <MainContent>
+            {children}
+          </MainContent>
           <Particles
             className="absolute inset-0 -z-10 animate-fade-in"
             quantity={100}/>
