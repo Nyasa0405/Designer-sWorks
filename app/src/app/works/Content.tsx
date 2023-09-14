@@ -1,5 +1,5 @@
 import {getWorkInfos, getWorksFolders} from '@/api/folders'
-import WorksList from '@/app/dashboard/WorksList'
+import WorksList from '@/app/works/WorksList'
 import {NonNullable} from '@/util/filterEx'
 
 
@@ -11,7 +11,9 @@ export default async function Content() {
     )
   ))).filter(NonNullable)
 
-  return <div>
-    <WorksList folders={folders}/>
-  </div>
+  return (
+    <div>
+      <WorksList folders={folders}/>
+    </div>
+  )
 }

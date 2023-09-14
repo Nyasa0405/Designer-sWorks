@@ -1,6 +1,10 @@
 import './globals.css'
+import MainContent from '@/component/MainContent'
+import Particles from '@/component/particles'
+import {Box} from '@mui/material'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import React from 'react'
 
 // @ts-ignore
 const inter = Inter({ subsets: ['latin'] })
@@ -17,7 +21,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <MainContent>
+          {children}
+        </MainContent>
+        <Box
+          sx={{ position: 'fixed', width: 1, height: 1}}
+        >
+          <Particles
+            className="absolute inset-0 -z-10 animate-fade-in"
+            quantity={100}/>
+        </Box>
+      </body>
     </html>
   )
 }

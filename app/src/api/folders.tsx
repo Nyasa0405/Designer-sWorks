@@ -1,5 +1,7 @@
+import markdownToHtml from '@/util/MarkdownToReactEle'
 import {StringUtils} from '@/util/MethodEx'
 import fs from 'fs'
+import matter from 'gray-matter'
 import path from 'path'
 
 
@@ -39,20 +41,19 @@ export async function getWorkInfos(folder: string): Promise<WorkInfo | null> {
   const param: Param = jsonPath.length == 1 ? getParamJson(jsonPath[0]) : {title: '', link: '', tags: []}
   return {
     title: param.title,
-    caption: await getReadme(readmes),
+    caption: await markdownToHtml(getReadme(readmes)),
     link: param.link,
     tags: param.tags
   }
 }
 
-async function getReadme(paths: string[]): Promise<string> {
+function getReadme(paths: string[]): string {
   let out: string = ''
   paths.forEach((filePath) => {
     out += fs.readFileSync(filePath, 'utf8')
   })
-  return out
+  return matter(out).content
 }
-
 function getParamJson(jsonPath: string): Param {
   const rawData = fs.readFileSync(jsonPath, 'utf8')
   const jsonData: Param = JSON.parse(rawData)
