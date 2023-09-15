@@ -1,9 +1,11 @@
 'use client'
 import {SideMenu} from '@/component/SideMenu'
-import {Grid, Typography} from '@mui/joy'
-import {Box} from '@mui/material'
+import {ArrowBack, KeyboardDoubleArrowLeftOutlined, KeyboardDoubleArrowLeftTwoTone} from '@mui/icons-material'
+import {Grid, Tooltip, Typography} from '@mui/joy'
+import {Box, useMediaQuery} from '@mui/material'
+import {grey} from '@mui/material/colors'
 import {usePathname} from 'next/navigation'
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {AnimatePresence, motion} from 'framer-motion'
 
 
@@ -51,6 +53,21 @@ export default function MainContent(
   const location = usePathname()
 
   const pageTitle = location == '/' ? 'Home' : 'Works'
+
+  const [state, setState] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
+  useEffect(() => {
+    // 画面サイズが小さい時にメニューを非表示にする
+    if (isMobile) {
+      setState(false);
+    } else {
+      setState(true);
+    }
+  }, [isMobile]);
+
+  const [view, setMenu] = useState(false)
+
   return (
     <Box>
       <Typography
@@ -67,6 +84,34 @@ export default function MainContent(
       >
         <AnimatedText text={pageTitle}/>
       </Typography>
+      { !state ?
+        <Box
+          sx={{
+            position: 'fixed',
+            top: 40,
+            left: 0,
+            zIndex: 'tooltip',
+            background: grey[600]
+          }}
+          onClick={() => {
+            if (view) setMenu(false)
+            else setMenu(true)
+          }}
+        >
+          { view ? <SideMenu /> : null }
+          <Tooltip
+            title="open Menu"
+            variant="plain"
+            color="neutral"
+            sx={{
+              p: 1
+            }}
+          >
+            <KeyboardDoubleArrowLeftOutlined fontSize="large" />
+          </Tooltip>
+        </Box>
+        : null
+      }
       <Grid
         container
         direction="row"
@@ -75,7 +120,7 @@ export default function MainContent(
         alignItems="flex-start"
       >
         <Grid xs={'auto'}>
-          <SideMenu/>
+          {state ? <SideMenu /> : null}
         </Grid>
         <Grid xs>
           {children}

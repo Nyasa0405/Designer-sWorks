@@ -1,5 +1,5 @@
 'use client'
-import {Home, KeyboardArrowRight, ImportContacts} from '@mui/icons-material'
+import {Home, KeyboardArrowRight, ImportContacts, Panorama} from '@mui/icons-material'
 import {List, ListItem, ListItemButton, ListItemContent, ListItemDecorator} from '@mui/joy'
 import {AnimatePresence} from 'framer-motion'
 import {useRouter} from 'next/navigation'
@@ -21,6 +21,13 @@ export function SideMenu() {
           <ListItemButton color="primary" onClick={() => router.push("/works")}>
             <ListItemDecorator><ImportContacts /></ListItemDecorator>
             <ListItemContent>Works</ListItemContent>
+            <KeyboardArrowRight />
+          </ListItemButton>
+        </ListItem>
+        <ListItem>
+          <ListItemButton color="primary" onClick={() => router.push("/gallery")}>
+            <ListItemDecorator><Panorama /></ListItemDecorator>
+            <ListItemContent>Gallery</ListItemContent>
             <KeyboardArrowRight />
           </ListItemButton>
         </ListItem>
