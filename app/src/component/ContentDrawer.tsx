@@ -1,5 +1,6 @@
+import {Close} from '@mui/icons-material'
 import {Grid, Sheet, styled} from '@mui/joy'
-import {Box, Drawer} from '@mui/material'
+import {Box, Drawer, SwipeableDrawer} from '@mui/material'
 import React from 'react'
 
 const Item = styled(Sheet)(({ theme }) => ({
@@ -8,29 +9,46 @@ const Item = styled(Sheet)(({ theme }) => ({
   ...theme.typography['body-sm'],
   padding: theme.spacing(3),
   color: theme.vars.palette.text.secondary,
-  width: '600px'
+  width: '100%'
 }));
 
 export default function ContentDrawer(
   props: {
     open?: boolean,
     onClose?: () => void,
+    onOpen?: () => void
     content: string
   }
 ) {
   return (
-    <Drawer
+    <SwipeableDrawer
       anchor={'right'}
       open={props.open}
-      onClose={props.onClose}
-      sx={{ flexGrow: 1 }}
+      onClose={ () => props.onClose?.() }
+      onOpen={ () => props.onOpen?.() }
+      sx={{ flexGrow: 1, width: 1 }}
     >
-      <Grid container spacing={2}>
-        <Grid >
-          <Item className={'markdown'} dangerouslySetInnerHTML={{__html: props.content}}/>
-        </Grid>
-      </Grid>
+      <Box
+        sx={{
 
-    </Drawer>
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row-reverse',
+            p: 0
+          }}
+          onClick={ () => props.onClose?.() }
+        >
+          <Close
+          />
+        </Box>
+
+        <Item className={'markdown'} dangerouslySetInnerHTML={{__html: props.content}}/>
+      </Box>
+
+
+    </SwipeableDrawer>
   )
 }

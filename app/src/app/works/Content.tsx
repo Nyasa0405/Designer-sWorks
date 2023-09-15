@@ -12,8 +12,6 @@ export default async function Content() {
   ))).filter(NonNullable)
 
   return (
-    <div>
-      <WorksList folders={folders}/>
-    </div>
+    <WorksList folders={folders}/>
   )
 }
